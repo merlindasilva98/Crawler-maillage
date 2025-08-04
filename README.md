@@ -1,0 +1,13 @@
+Outil facile pour visualiser la carte de maillage interne d'un site donné. Fonctionne bien pour des sites de petite à moyenne taille, mais pas adapté aux sites de grande taille.
+Entrer l'URL du site à crawler en format (https://www.exemple.com).
+Choisir le degré de profondeur de crawl maximum (mettre 10 assure presque à coup sûr de ne rater aucune page).
+Lancer le crawl, cette étape peut être un peu longue, surtout si le site possède un grand nobre de page (>50).
+Pour génénerer le graphe, choisissez le degré de profondeur maximal (idem, choisissez 10 pour une vue d'ensemble, en revanche, si vous voulez simplement voir les pages les moins profondes, mettez la valeur désirée).
+Encore une fois, le graphe peut mettre du temps à charger pour les gros sites, et l'interface peut "freeze" durant le temps de chargement. Ne vous en faites pas si aucune barre de chargement ne s'active ou que le site a l'air de planter, il suffit d'attendre.
+Le graphe est maintenant généré, que puis-je en tirer comme informations, et comment puis-je intéragir avec ce graphe ?
+1) les noeuds ont des couleurs différentes en fonction de leur profondeur, c'est à dire du nombre minimum de clics nécessaires pour atteindre la page en question depuis la page d'accueil. Une légende du code couleur est affichée sous le graphe.
+2) les arêtes représentent les liens entre les pages. Une arête grise d'une page_1 vers une page_2 indique que la page_1 pointe vers la page_2, mais pas réciproqiuement. Une arête rouge signifie que les pages pointent réciproquement l'une vers l'autre, il y aura alors deux arêtes rouges de sens opposé entre page_1 et page_2.
+3) en passant le curseur de la souris sur une arête, le texte de l'ancre du lien menant de la page source à la page cible, pas besoin de cliquer dessus.
+4) si le sitemap du site est accessible, ce qui n'est pas toujours le cas, les pages orphelines apparaîtront en gris, et ne seront liées à rien dans le graphe (ahrefs détecte aussi les pages orpheline si jamais). 
+5) les graphes ne sont pas toujours très lisibles en tant que tels, surtout s'il y a beaucoup de pages. Vous pouvez déplacer les noeuds pour créer une structure plus ordonnée. Si vous bougez un noeud, il ne reprendra pas sa position initiale et vous pouvez donc les écarter pour améliorer la lisibilité.
+6) si vous cliquez sur un noeud, tous les liens entrant et sortants de ce noeud seront mis en évidence, et tous les autres liens seront masqués. Cette fonctionnalité est pratique pour voir clairement quelles pages sont liées à une page spécifique, cliquez ensuite n'importe où avec votre souris pour réafficher le graphe entier 
