@@ -1,0 +1,7 @@
+streamlit
+beautifulsoup4
+requests
+pyvis
+networkx
+tqdm
+aiohttp>=3.8
