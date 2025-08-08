@@ -5,7 +5,7 @@ from renderer import render_graph
 from pathlib import Path
 
 st.set_page_config(page_title="Graphe de Maillage Interne", layout="wide")
-st.title("🔗 Visualisation du Maillage Interne")
+st.title("Visualisation du Maillage Interne")
 
 st.markdown("""
 Ce petit outil vous permet de :
@@ -30,13 +30,13 @@ if st.button("Lancer le crawl"):
         except Exception as e:
             st.error(f"Erreur pendant le crawl : {e}")
 
-    # 🔍 Infos Sitemap
+    # Infos Sitemap
     sitemap_set = set(normalize_url(url) for url in sitemap_urls)
     isolated_from_sitemap = [url for url in sitemap_set if url in graph.nodes and graph.degree(url) == 0]
     num_total = len(sitemap_set)
     num_isolated = len(isolated_from_sitemap)
 
-    with st.expander("📄 Infos Sitemap"):
+    with st.expander("Infos Sitemap"):
         st.markdown(f"""
         - **Total d'URLs dans le sitemap** : `{num_total}`
         - **Pages du sitemap non reliées dans le maillage interne** : `{num_isolated}`
@@ -44,7 +44,7 @@ if st.button("Lancer le crawl"):
 
 # Affichage du graphe
 if "graph" in st.session_state and "depths" in st.session_state:
-    st.markdown("### 🎨 Filtres d’affichage")
+    st.markdown("### Filtres d’affichage")
 
     min_depth = st.slider("Afficher à partir de la profondeur", 0, max_depth, 0)
     max_depth_filter = st.slider("Afficher jusqu’à la profondeur", min_depth, max_depth, max_depth)
@@ -53,7 +53,7 @@ if "graph" in st.session_state and "depths" in st.session_state:
         with st.spinner("Génération du graphe..."):
             html_path = render_graph(st.session_state.graph, st.session_state.depths, min_depth, max_depth_filter)
             st.success("Graphe généré !")
-            st.components.v1.html(Path(html_path).read_text(), height=800, scrolling=True)
+            st.components.v1.html(Path(html_path).read_text(), height=800, width=1200, scrolling=True)
 
     st.markdown("### 🟡 Légende des couleurs de profondeur")
     from renderer import depth_colors

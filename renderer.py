@@ -9,11 +9,14 @@ depth_colors = [
     "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
 ]
 
-
 def render_graph(graph, depths, min_depth=0, max_depth=10):
     """
     Rend le graphe en HTML avec Pyvis.
     """
+    from pyvis.network import Network
+    import tempfile
+    from pathlib import Path
+
     net = Network(height="800px", width="100%", directed=True, notebook=False)
     net.barnes_hut(gravity=-25000, central_gravity=0.3, spring_length=120)
 
@@ -91,11 +94,24 @@ def render_graph(graph, depths, min_depth=0, max_depth=10):
     </script>
     """
 
+    # CSS pour forcer la largeur en plein écran
+    custom_css = """
+    <style>
+    html, body, #mynetwork {
+        width: 100vw !important;
+        max-width: 100% !important;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    """
+
     # Génère le HTML final
     with tempfile.NamedTemporaryFile(delete=False, suffix=".html", mode='w', encoding="utf-8") as tmp_file:
         net.save_graph(tmp_file.name)
         html_content = Path(tmp_file.name).read_text(encoding="utf-8")
         html_content = html_content.replace("</body>", custom_js + "</body>")
+        html_content = html_content.replace("<body>", "<body>" + custom_css)
         tmp_path = Path(tmp_file.name)
         tmp_path.write_text(html_content, encoding="utf-8")
 
